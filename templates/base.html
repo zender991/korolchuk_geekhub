@@ -18,8 +18,7 @@
     <title>{% block title %}{% endblock %}</title>
     <meta name="keywords" content="{% block meta_keywords %}Geekhub store{% endblock %}" />
     <meta name="description" content="{% block meta_description %}Buy best price free shipping discount {% endblock %}" />
-    <link href="https://s3.us-east-2.amazonaws.com/python-test123/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="https://s3.us-east-2.amazonaws.com/python-test123/bootstrap.min.js"></script>
+
     <link href="https://s3.us-east-2.amazonaws.com/python-test123/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="https://s3.us-east-2.amazonaws.com/python-test123/menu.css" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="https://s3.us-east-2.amazonaws.com/python-test123/menu.js"></script>
@@ -37,9 +36,9 @@
         </ul>
     {% endif %}
 
-       <div class="header-bottom" style="background-color: aliceblue">
+       <div class="header-bottom" style="background-color: #eee">
 		 <div class="container">
-				<div class="logo">
+				<div>
                     <a href="/">
                         <img width="140px" height="70px" src="https://s3.us-east-2.amazonaws.com/python-test123/apple.png" />
                     </a>
@@ -86,5 +85,28 @@
 
 
     {% block content %}{% endblock %}
+
+    {% block footer %}
+        <div class="shoping" style="margin-top: 40px">
+         <div class="container">
+             <div class="shpng-grids">
+                 <div class="col-md-4 shpng-grid">
+                     <h3>Free Shipping</h3>
+                     <p>On Order Over 8000</p>
+                 </div>
+                 <div class="col-md-4 shpng-grid">
+                     <h3>Order Return</h3>
+                     <p>Return Within 14days</p>
+                 </div>
+                 <div class="col-md-4 shpng-grid">
+                     <h3>COD</h3>
+                     <p>Cash On Delivery</p>
+                 </div>
+                 <div class="clearfix"></div>
+             </div>
+         </div>
+         </div>
+    {% endblock %}
+
 </body>
 </html>

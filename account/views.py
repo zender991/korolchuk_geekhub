@@ -35,7 +35,7 @@ def add_bookmark(request):
         bookmark = Bookmark(product_id=p_id, user_id=user_id)
         bookmark.save()
         messages.info(request, 'Product added to the wishlist')
-        return redirect('/')
+        return HttpResponseRedirect(reverse('product:product-details', args=(p_id,)))
 
 def get_orders(request):
     if request.method == 'GET':

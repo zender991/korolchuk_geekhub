@@ -8,14 +8,6 @@
     {% load product_tags %}
 
 
-
-
-
-
-
-
-
-
     <div class="single-sec">
 	 <div class="container">
 
@@ -26,29 +18,54 @@
                         <img src="http://{{ request.get_host }}/media/{{ product.image }}" />
                      </div>
 				 </div>
-				  <div class="single-right">
+				  <div class="single-right" style="font-size: 20px">
 					 <h3>{{ product.title }}</h3>
 					 <div class="id"><h4>ID: {{ product.sku }}</h4></div>
+                      <div class="id"><h4>{{ product.description }}</h4></div>
 
 					  <div class="cost">
 						 <div class="prdt-cost">
 							 <ul>
-								 <li>MRP: <del>Rs 55000</del></li>
-								 <li>Sellling Price:</li>
 								 <li class="active">hrn {{ product.price|currency_price }}</li>
-								 <a href="#">BUY NOW</a>
 							 </ul>
+                             <form action="{% url 'product:cart' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="number" name="quantity" min="1" max="20" value="1">
+                                    <div class="buy-button">
+                                        {% if product.quantity == 0%}
+                                            <button type="button" disabled>Out of stock!</button>
+                                        {% else %}
+                                            <button type="submit">Add to cart!</button>
+                                        {% endif %}
+                                    </div>
+                             </form>
+
+                             <form action="{% url 'account:add-bookmark' %}" method="POST">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="user_id" value="{{ request.user.id }}">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                 <div class="bookmark-button">
+                                    <button type="submit">Add to wishlist</button>
+                                </div>
+                            </form>
+
+                            {% if user.is_superuser %}
+                                <form action="{% url 'product:edit-product' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="bookmark-button">
+                                        <button type="submit">Edit</button>
+                                    </div>
+                                </form>
+                            {% endif %}
 						 </div>
-
-
 					  </div>
-
-
 				  </div>
          </div>
-
 	  </div>
-     </div>
+
 
 
 
