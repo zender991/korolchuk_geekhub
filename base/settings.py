@@ -88,28 +88,28 @@ WSGI_APPLICATION = 'base.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'korolchuk_geekhub',
-         'USER': 'postgres',
-         'PASSWORD': 'postgres',
-         'HOST': 'localhost',
-         'PORT': '',
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd5u5t4n5claars',
-#          'USER': 'xgphqkxnoapfnc',
-#          'PASSWORD': '21a9b0a5edf761cd897d52426b96628d32243c1d6696a3556a256062e87b6b70',
-#          'HOST': 'ec2-23-23-222-184.compute-1.amazonaws.com',
-#          'PORT': '5432',
+#         'NAME': 'korolchuk_geekhub',
+#          'USER': 'postgres',
+#          'PASSWORD': 'postgres',
+#          'HOST': 'localhost',
+#          'PORT': '',
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbunjjsu3o3dq7',
+         'USER': 'blybkztkmgqtkn',
+         'PASSWORD': 'aa2487810d60935f93199fe972f38f11ae52f23a60b5396e47e7187852466cc8',
+         'HOST': 'ec2-54-83-58-222.compute-1.amazonaws.com',
+         'PORT': '5432',
+    }
+}
 
 
 # Password validation
