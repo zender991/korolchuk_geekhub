@@ -34,9 +34,12 @@
 
     </form>
 
+   {% if user.is_superuser %}
     <form action="{% url 'product:edit-product' product.id %}" method="POST">
         {% csrf_token %}
         <button type="submit">Edit</button>
     </form>
+    {% endif %}
+
 
 {% endblock %}

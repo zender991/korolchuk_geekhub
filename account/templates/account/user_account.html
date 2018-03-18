@@ -6,10 +6,13 @@
     <ul>
     <li><a href="{% url 'account:wishlist' %}">My wishlist</a></li>
     <li><a href="{% url 'account:user_orders' %}">My orders</a></li>
-    <li><a href="{% url 'product:add-product' %}">Add product</a></li>
+    {% if user.is_superuser %}
+        <li><a href="{% url 'product:add-product' %}">Add product</a></li>
+    {% endif %}
     </ul>
 
-        <form action="{% url 'account:upload-csv' %}" method="POST" enctype="multipart/form-data">
+    {% if user.is_superuser %}
+    <form action="{% url 'account:upload-csv' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <input type="file" name="csv_file" id="myFile" onchange="return fileValidation()">
@@ -17,9 +20,7 @@
         <button type="submit">Upload csv</button>
         <div id="imagePreview"></div>
     </form>
-
-
-
+    {% endif %}
 
     <script>
     function fileValidation(){
