@@ -123,7 +123,7 @@ def remove_product_from_session(request):
 
         return HttpResponseRedirect(reverse('product:cart'))
 
-from base.settings import BASE_DIR, MEDIA_ROOT, MEDIA_URL
+
 def checkout(request):
     request.session.modified = True
     for product in request.session['products']:
@@ -138,9 +138,7 @@ def checkout(request):
         'orders': request.session['products'],
         'subtotal': request.session['subtotal']
     }
-    print(BASE_DIR)
-    print(MEDIA_ROOT)
-    print(MEDIA_URL)
+
     return render(request, 'product/checkout.html', context)
 
 

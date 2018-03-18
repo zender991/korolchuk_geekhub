@@ -2,6 +2,7 @@ from product.models import Product, Order
 from account.models import Bookmark
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
 from django.contrib import messages
+from base.settings import BASE_DIR
 import csv
 from django.core.files.storage import FileSystemStorage
 import json
@@ -50,8 +51,6 @@ def get_orders(request):
 
         return render(request, 'account/user_orders.html', context)
 
-
-from base.settings import BASE_DIR
 
 def upload_csv(request):
     if request.method == 'POST' and request.FILES['csv_file']:
