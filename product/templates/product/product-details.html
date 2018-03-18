@@ -6,40 +6,75 @@
 
 {% block content %}
     {% load product_tags %}
-    <p>{{ product.title }}</p>
-    <p>{{ product.description }}</p>
-    <img src="http://{{ request.get_host }}/media/{{ product.image }}" />
-    <p>{{ product.price|currency_price }}</p>
 
-    <form action="{% url 'product:cart' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <input type="number" name="quantity" min="1" max="20" value="1">
 
-        {% if product.quantity == 0%}
-            <button type="button" disabled>Out of stock!</button>
-        {% else %}
-            <button type="submit">Add to cart!</button>
-        {% endif %}
-    </form>
 
-    <form action="{% url 'account:add-bookmark' %}" method="POST">
-        {% csrf_token %}
 
-        <input type="hidden" name="user_id" value="{{ request.user.id }}">
-        <input type="hidden" name="product_id" value="{{ product.id }}">
 
-        <button type="submit">Add to wishlist</button>
 
-    </form>
 
-   {% if user.is_superuser %}
-    <form action="{% url 'product:edit-product' product.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">Edit</button>
-    </form>
-    {% endif %}
+
+
+
+    <div class="single-sec">
+	 <div class="container">
+
+		 <!-- start content -->
+		 <div class="col-md-9 det">
+				 <div class="single_left">
+					 <div class="flexslider">
+                        <img src="http://{{ request.get_host }}/media/{{ product.image }}" />
+                     </div>
+				 </div>
+				  <div class="single-right">
+					 <h3>{{ product.title }}</h3>
+					 <div class="id"><h4>ID: {{ product.sku }}</h4></div>
+
+					  <div class="cost">
+						 <div class="prdt-cost">
+							 <ul>
+								 <li>MRP: <del>Rs 55000</del></li>
+								 <li>Sellling Price:</li>
+								 <li class="active">hrn {{ product.price|currency_price }}</li>
+								 <a href="#">BUY NOW</a>
+							 </ul>
+						 </div>
+
+
+					  </div>
+
+
+				  </div>
+         </div>
+
+	  </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% endblock %}
