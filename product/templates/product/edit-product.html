@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+
+
+{% block content %}
+
+
+    <form action="{% url 'product:save-edited-product' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <p>Product title</p>
+        <input type="text" name="product_title" value="{{ product.title }}">
+        <p>Product description</p>
+        <input type="text" name="product_description" value="{{ product.description }}">
+        <p>Quantity</p>
+        <input type="number" name="product_quantity" value="{{ product.quantity }}">
+        <p>Image</p>
+        <input type="hidden" name="product_image_hidden" value="{{ product.image }}">
+        <input type="file" name="product_image">
+        <p>Meta keywords</p>
+        <input type="text" name="product_meta_keywords" value="{{ product.meta_keywords }}">
+        <p>Meta description</p>
+        <input type="text" name="product_meta_description" value="{{ product.meta_description }}">
+        <p>Price</p>
+        <input type="text" name="product_price" value="{{ product.price }}">
+
+        <button type="submit">Edit</button>
+
+    </form>
+
+
+
+
+{% endblock %}

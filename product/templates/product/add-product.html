@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+
+
+{% block content %}
+
+
+    <form action="{% url 'product:add-product-to-db' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <p>Product title</p>
+        <input type="text" name="product_title">
+        <p>Product description</p>
+        <input type="text" name="product_description">
+        <p>Quantity</p>
+        <input type="number" name="product_quantity">
+        <p>Image</p>
+        <input type="file" name="product_image" required>
+        <p>SKU</p>
+        <input type="text" name="product_sku">
+        <p>Price</p>
+        <input type="text" name="product_price">
+
+        <button type="submit">Add</button>
+
+    </form>
+
+
+{% endblock %}

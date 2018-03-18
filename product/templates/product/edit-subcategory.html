@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ subcategory.title }}{% endblock %}
+
+
+{% block content %}
+
+
+    <form action="{% url 'product:save-edited-subcategory' %}" method="POST">
+        {% csrf_token %}
+
+        <input type="hidden" name="subcategory_id" value="{{ subcategory.id }}">
+        <p>Subcategory title</p>
+        <input type="text" name="subcategory_title" value="{{ subcategory.title }}">
+
+        <button type="submit">Edit</button>
+
+    </form>
+
+
+
+
+{% endblock %}

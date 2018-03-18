@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+    {% load product_tags %}
+    {% for product in products %}
+        <a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br>
+        <p>Price - {{ product.price|currency_price }} hrn</p>
+        <p>Quantity - {{ product.quantity }}</p>
+        <form action="{% url 'product:remove-product' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <button type="submit">Remove</button>
+        </form>
+        <hr/>
+
+    {% endfor %}
+
+    {% if  subtotal%}
+        <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
+    {% else %}
+        <h4>Your cart is empty</h4>
+    {% endif %}
+
+    <a href=" {% url 'product:checkout' %}" >Proceed to Checkout</a>
+{% endblock %}

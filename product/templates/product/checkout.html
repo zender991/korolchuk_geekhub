@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+    {% load product_tags %}
+    <h3>Your order</h3>
+
+    {% for product in orders %}
+        <ul>
+            <li>Title - {{ product.title }}</li>
+            <li>Price - {{ product.price|currency_price }} hrn</li>
+            <li>Quantity - {{ product.quantity }}</li>
+        </ul>
+        <hr>
+
+    {% endfor %}
+
+    <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
+
+    <a href="{% url 'product:cart' %}"> Back to Cart</a>
+
+
+    <form action="{% url 'product:complete-checkout' %}" method="POST">
+        {% csrf_token %}
+
+        <p>Name</p>
+        <input type="text" name="name">
+        <p>Email</p>
+        <input type="text" name="email">
+
+        <button type="submit">Complete Order</button>
+    </form>
+
+
+
+{% endblock %}

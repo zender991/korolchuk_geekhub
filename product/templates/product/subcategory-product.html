@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block meta_keywords %}{{ subcategory }}{% endblock %}
+{% block title %}{{ subcategory }}{% endblock %}
+
+
+{% block content %}
+    {% load product_tags %}
+
+    <p>{{ subcategory }}</p>
+
+    <form action="{% url 'product:edit-subcategory' subcategory.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Edit</button>
+    </form>
+
+
+    {% for product in subcategory.product_set.all %}
+        <a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br>
+        <p>Price - {{ product.price|currency_price }}</p>
+
+        <form action="{% url 'product:cart' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <input type="hidden" name="quantity" value="1">
+
+        {% if product.quantity == 0%}
+            <button type="button" disabled>Out of stock!</button>
+        {% else %}
+            <button type="submit">Add to cart!</button>
+        {% endif %}
+        </form>
+
+    {% endfor %}
+
+
+
+{% endblock %}

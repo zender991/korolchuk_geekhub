@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+    <ul>
+    <li><a href="{% url 'account:wishlist' %}">My wishlist</a></li>
+    <li><a href="{% url 'account:user_orders' %}">My orders</a></li>
+    <li><a href="{% url 'product:add-product' %}">Add product</a></li>
+    </ul>
+
+        <form action="{% url 'account:upload-csv' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input type="file" name="csv_file" id="myFile" onchange="return fileValidation()">
+
+        <button type="submit">Upload csv</button>
+        <div id="imagePreview"></div>
+    </form>
+
+
+
+
+    <script>
+    function fileValidation(){
+    var fileInput = document.getElementById('myFile');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.csv)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Please upload file having extension .csv only.');
+        fileInput.value = '';
+        return false;
+    }else{
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').innerHTML = '<img src="https://cdn.vectorstock.com/i/thumb-large/59/81/green-tick-check-mark-icon-simple-style-vector-8375981.jpg"/>';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+
+    </script>
+{% endblock %}

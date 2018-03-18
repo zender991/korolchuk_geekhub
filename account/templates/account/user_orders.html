@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block content %}
+    {% load product_tags %}
+
+    <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+    {% for order in orders %}
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+             {% for item in  order.order_details%}
+              <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.price |currency_price }}</td>
+                <td>{{ item.quantity }}</td>
+              </tr>
+              {% endfor %}
+
+        </table>
+        <h3>Subtotal - {{ order.subtotal|subtotal_currency }}</h3>
+        <hr>
+    {% endfor %}
+
+{% endblock %}
