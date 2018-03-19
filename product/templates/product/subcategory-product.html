@@ -6,33 +6,45 @@
 {% block content %}
     {% load product_tags %}
 
-    <p>{{ subcategory }}</p>
+    <div>
+        <h2 style="text-align: center; padding-top: 5px">{{ subcategory }}</h2>
 
-    {% if user.is_superuser %}
-    <form action="{% url 'product:edit-subcategory' subcategory.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">Edit</button>
-    </form>
-    {% endif %}
-
-
-    {% for product in subcategory.product_set.all %}
-        <a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br>
-        <p>Price - {{ product.price|currency_price }}</p>
-
-        <form action="{% url 'product:cart' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <input type="hidden" name="quantity" value="1">
-
-        {% if product.quantity == 0%}
-            <button type="button" disabled>Out of stock!</button>
-        {% else %}
-            <button type="submit">Add to cart!</button>
+        {% if user.is_superuser %}
+            <div class="bookmark-button" style="font-size: 20px; text-align: right; padding-bottom: 5px">
+                <form action="{% url 'product:edit-subcategory' subcategory.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Edit</button>
+                </form>
+            </div>
         {% endif %}
-        </form>
+    </div>
 
-    {% endfor %}
 
+    <table class="table">
+    <tbody>
+        {% for product in subcategory.product_set.all %}
+             <tr>
+                <td><img src="http://{{ request.get_host }}/media/{{ product.image }}" /></td>
+                <td><a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br></td>
+                <td><p>Price - {{ product.price|currency_price }}</p></td>
+                <td>
+                <form action="{% url 'product:cart' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="quantity" value="1">
+
+                <div class="buy-button">
+                    {% if product.quantity == 0%}
+                        <button type="button" disabled>Out of stock!</button>
+                    {% else %}
+                        <button type="submit">Add to cart!</button>
+                    {% endif %}
+                </div>
+                </form>
+             </td>
+             </tr>
+        {% endfor %}
+    </tbody>
+    </table>
 {% endblock %}

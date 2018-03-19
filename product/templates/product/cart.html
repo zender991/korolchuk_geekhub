@@ -3,24 +3,37 @@
 
 {% block content %}
     {% load product_tags %}
-    {% for product in products %}
-        <a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br>
-        <p>Price - {{ product.price|currency_price }} hrn</p>
-        <p>Quantity - {{ product.quantity }}</p>
-        <form action="{% url 'product:remove-product' %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <button type="submit">Remove</button>
-        </form>
-        <hr/>
 
-    {% endfor %}
+    <h2 style="text-align: center; padding-top: 5px">Cart</h2>
+    <div style="padding: 20px">
+    <table class="table" >
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td><a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br></td>
+                    <td><p>{{ product.price|currency_price }} hrn</p></td>
+                    <td><p>Quantity - {{ product.quantity }}</p></td>
+                    <td><form action="{% url 'product:remove-product' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <div class="bookmark-button">
+                        <button type="submit">Remove</button>
+                    </div>
+                    </form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 
     {% if  subtotal%}
         <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
     {% else %}
         <h4>Your cart is empty</h4>
     {% endif %}
-
-    <a href=" {% url 'product:checkout' %}" >Proceed to Checkout</a>
+    <div class="buy-button">
+        <a href=" {% url 'product:checkout' %}" >Proceed to Checkout</a>
+    </div>
+    </div>
 {% endblock %}
