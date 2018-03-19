@@ -3,23 +3,25 @@
 {% block title %}My Account{% endblock %}
 
 {% block content %}
-    <ul>
-    <li><a href="{% url 'account:wishlist' %}">My wishlist</a></li>
-    <li><a href="{% url 'account:user_orders' %}">My orders</a></li>
-    {% if user.is_superuser %}
-        <li><a href="{% url 'product:add-product' %}">Add product</a></li>
-    {% endif %}
+    <ul class="list-group" style="padding: 20px">
+        <li class="list-group-item"><a href="{% url 'account:wishlist' %}">My wishlist</a></li>
+        <li class="list-group-item"><a href="{% url 'account:user_orders' %}">My orders</a></li>
+        {% if user.is_superuser %}
+            <li class="list-group-item"><a href="{% url 'product:add-product' %}">Add product</a></li>
+        {% endif %}
     </ul>
 
     {% if user.is_superuser %}
-    <form action="{% url 'account:upload-csv' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="buy-button" style="padding: 20px">
+        <form action="{% url 'account:upload-csv' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
-        <input type="file" name="csv_file" id="myFile" onchange="return fileValidation()">
+            <input type="file" name="csv_file" id="myFile" onchange="return fileValidation()">
 
-        <button type="submit">Upload csv</button>
-        <div id="imagePreview"></div>
-    </form>
+            <button type="submit">Upload csv</button>
+            <div id="imagePreview"></div>
+        </form>
+    </div>
     {% endif %}
 
     <script>

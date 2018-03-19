@@ -21,6 +21,7 @@
 
     <link href="https://s3.us-east-2.amazonaws.com/python-test123/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="https://s3.us-east-2.amazonaws.com/python-test123/menu.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://s3.us-east-2.amazonaws.com/python-test123/table.css" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="https://s3.us-east-2.amazonaws.com/python-test123/menu.js"></script>
     <script>$(document).ready(function(){$(".memenu").memenu();});</script>
 
@@ -68,7 +69,7 @@
 					</li>
                      {% endfor %}
 
-					<li class="grid"><a href="contact.html">Contact</a></li>
+					<li class="grid"><a href="{% url 'product:cart'%}">Cart</a></li>
 
 
                     {% if request.user.is_authenticated %}

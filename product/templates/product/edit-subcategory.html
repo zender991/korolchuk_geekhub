@@ -4,19 +4,20 @@
 
 {% block content %}
 
+    <h2 style="text-align: center; padding-top: 5px">Edit subcategory</h2>
+    <div class="order-table">
+        <form action="{% url 'product:save-edited-subcategory' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="hidden" name="subcategory_id" value="{{ subcategory.id }}">
+                <p>Subcategory title</p>
+                <input type="text" class="form-control" placeholder="Subcategory title" name="subcategory_title" value="{{ subcategory.title }}">
 
-    <form action="{% url 'product:save-edited-subcategory' %}" method="POST">
-        {% csrf_token %}
-
-        <input type="hidden" name="subcategory_id" value="{{ subcategory.id }}">
-        <p>Subcategory title</p>
-        <input type="text" name="subcategory_title" value="{{ subcategory.title }}">
-
-        <button type="submit">Edit</button>
-
-    </form>
-
-
+                <div class="buy-button">
+                    <button type="submit">Edit</button>
+                </div>
+            </div>
+        </form>
 
 
 {% endblock %}

@@ -5,24 +5,8 @@
 {% block content %}
     {% load product_tags %}
 
-    <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-
+    <h2 style="text-align: center; padding-top: 5px">Your orders</h2>
+    <div class="order-table">
     {% for order in orders %}
         <table>
           <tr>
@@ -42,5 +26,5 @@ tr:nth-child(even) {
         <h3>Subtotal - {{ order.subtotal|subtotal_currency }}</h3>
         <hr>
     {% endfor %}
-
+    </div>
 {% endblock %}

@@ -4,26 +4,27 @@
 
 {% block content %}
 
-
+    <h2 style="text-align: center; padding-top: 5px">Add product</h2>
+    <div class="order-table">
     <form action="{% url 'product:add-product-to-db' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        <div class="input-group">
 
-        <p>Product title</p>
-        <input type="text" name="product_title">
-        <p>Product description</p>
-        <input type="text" name="product_description">
-        <p>Quantity</p>
-        <input type="number" name="product_quantity">
-        <p>Image</p>
-        <input type="file" name="product_image" required>
-        <p>SKU</p>
-        <input type="text" name="product_sku">
-        <p>Price</p>
-        <input type="text" name="product_price">
+            <input type="text" class="form-control" placeholder="Product title" name="product_title">
+            <input type="text" class="form-control" placeholder="Product description" name="product_description">
+            <input type="number" class="form-control" placeholder="Quantity" name="product_quantity">
+            <input type="text" class="form-control" placeholder="SKU" name="product_sku">
+            <input type="text" class="form-control" placeholder="Price" name="product_price">
+            <p>Image</p>
+            <input type="file" class="form-control" placeholder="Image" name="product_image" required>
 
-        <button type="submit">Add</button>
+            <div class="buy-button">
+                <button type="submit">Add</button>
+            </div>
+
+        </div>
 
     </form>
-
+</div>
 
 {% endblock %}
