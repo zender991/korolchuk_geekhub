@@ -5,9 +5,9 @@
 
 {% block content %}
     {% load product_tags %}
-
+    <div style="padding: 20px">
     <div>
-        <h2 style="text-align: center; padding-top: 5px">{{ subcategory }}</h2>
+        <h2 style="text-align: center">{{ subcategory }}</h2>
 
         {% if user.is_superuser %}
             <div class="bookmark-button" style="font-size: 20px; text-align: right; padding-bottom: 5px">
@@ -47,4 +47,5 @@
         {% endfor %}
     </tbody>
     </table>
+    </div>
 {% endblock %}
