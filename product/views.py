@@ -281,6 +281,5 @@ def add_product_to_db(request):
 def make_json_api(request):
     products = Product.objects.all()
     jsondata = serializers.serialize('json', products)
-    return HttpResponse(jsondata)
-
+    return HttpResponse(jsondata, content_type="application/json")
 

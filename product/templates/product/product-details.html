@@ -19,9 +19,23 @@
                      </div>
 				 </div>
 				  <div class="single-right" style="font-size: 20px">
+                      <div style="float: right">
+                            {% if user.is_superuser %}
+                                <form action="{% url 'product:edit-product' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="bookmark-button">
+                                        <button type="submit">Edit</button>
+                                    </div>
+                                </form>
+                            {% endif %}
+                      </div>
+
+
 					 <h3>{{ product.title }}</h3>
 					 <div class="id"><h4>ID: {{ product.sku }}</h4></div>
                       <div class="id"><h4>{{ product.description }}</h4></div>
+
+
 
 					  <div class="cost">
 						 <div class="prdt-cost">
@@ -42,6 +56,7 @@
                                     </div>
                              </form>
 
+                            {% if request.user.is_authenticated %}
                              <form action="{% url 'account:add-bookmark' %}" method="POST">
                                 {% csrf_token %}
 
@@ -51,14 +66,6 @@
                                     <button type="submit">Add to wishlist</button>
                                 </div>
                             </form>
-
-                            {% if user.is_superuser %}
-                                <form action="{% url 'product:edit-product' product.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <div class="bookmark-button">
-                                        <button type="submit">Edit</button>
-                                    </div>
-                                </form>
                             {% endif %}
 						 </div>
 					  </div>

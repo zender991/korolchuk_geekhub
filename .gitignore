@@ -107,3 +107,4 @@ venv.bak/
 idea
 
 base/settings.py
+.base/settings.py

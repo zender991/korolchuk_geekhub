@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^complete-checkout/$', complete_order, name='complete-checkout'),
     url(r'^add-product/$', add_product, name='add-product'),
     url(r'^add-product-to-db/$', add_product_to_db, name='add-product-to-db'),
-    url(r'^make-json-api/$', make_json_api, name='make-json-api'),
+    url(r'^products.json$', make_json_api, name='make-json-api'),
     #url(r'^(?P<id>\d+)/order-products$', subcategory_product, name='order-products'),
 
 
