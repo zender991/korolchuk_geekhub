@@ -26,12 +26,14 @@
     </table>
 
 
+    <div style="padding: 10px">
+        {% if  subtotal%}
+            <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
+        {% else %}
+            <h4>Your cart is empty</h4>
+        {% endif %}
+    </div>
 
-    {% if  subtotal%}
-        <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
-    {% else %}
-        <h4>Your cart is empty</h4>
-    {% endif %}
     <div class="buy-button">
         <a href=" {% url 'product:checkout' %}" >Proceed to Checkout</a>
     </div>

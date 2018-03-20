@@ -6,18 +6,24 @@
 
     <h2 style="text-align: center; padding-top: 5px">Your order</h2>
     <div class="order-table">
+        <div style="padding-left: 20px">
+            {% for product in orders %}
+                <ul>
+                    <li>Title - {{ product.title }}</li>
+                    <li>Price - {{ product.price|currency_price }} hrn</li>
+                    <li>Quantity - {{ product.quantity }}</li>
+                </ul>
+                <hr>
 
-        {% for product in orders %}
-            <ul>
-                <li>Title - {{ product.title }}</li>
-                <li>Price - {{ product.price|currency_price }} hrn</li>
-                <li>Quantity - {{ product.quantity }}</li>
-            </ul>
-            <hr>
+            {% endfor %}
+        </div>
 
-        {% endfor %}
 
-        <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
+        {% if  subtotal%}
+            <h3>Subtotal - {{ subtotal|subtotal_currency }} hrn</h3>
+        {% else %}
+            <h4>Your cart is empty</h4>
+        {% endif %}
 
         <a href="{% url 'product:cart' %}"> Back to Cart</a>
 

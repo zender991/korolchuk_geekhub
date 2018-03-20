@@ -3,14 +3,15 @@
 {% block title %}Main Products{% endblock %}
 
 {% block content %}
+    {% load product_tags %}
 
     {% for product in products %}
         <div class="feature-grids">
 			 <div class="col-md-3 feature-grid jewel">
-				 <a href="{% url 'product:product-details' product.id %}"><img src="http://{{ request.get_host }}/media/{{ product.image }}">
+				 <a href="{% url 'product:product-details' product.id %}"><img src="http://{{ request.get_host }}/media/{{ product.image }}" />
 					 <div class="arrival-info">
 						 <h4 style="font-size: 20px; color: black">{{ product.title }}</h4>
-						 <p>{{ product.price }}</p>
+						 <p>{{ product.price|currency_price }} hrn</p>
 					 </div>
 					 </a>
 			 </div>

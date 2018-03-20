@@ -24,7 +24,7 @@
     <tbody>
         {% for product in subcategory.product_set.all %}
              <tr>
-                <td><img src="http://{{ request.get_host }}/media/{{ product.image }}" /></td>
+                <td><img src="http://{{ request.get_host }}/media/{{ product.image }}" width="150px" /></td>
                 <td><a href="{% url 'product:product-details' product.id %}">{{ product.title }}</a> <br></td>
                 <td><p>Price - {{ product.price|currency_price }}</p></td>
                 <td>
