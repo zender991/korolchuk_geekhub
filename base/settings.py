@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django_crontab',
     'product',
     'registration',
     'account',
@@ -180,6 +179,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
-CRONJOBS = [
-    ('*/1 * * * *', 'product.cron.get_api_data'),
-]
+
