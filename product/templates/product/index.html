@@ -4,7 +4,7 @@
 
 {% block content %}
     {% load product_tags %}
-
+    <div>
     {% for product in products %}
         <div class="feature-grids">
 			 <div class="col-md-3 feature-grid jewel">
@@ -16,8 +16,9 @@
 					 </a>
 			 </div>
 
-			 <div class="clearfix"></div>
+
 		 </div>
     {% endfor %}
-
+    </div>
+<div class="clearfix"></div>
 {% endblock %}
