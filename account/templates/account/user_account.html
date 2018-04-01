@@ -8,6 +8,7 @@
         <li class="list-group-item"><a href="{% url 'account:user_orders' %}">My orders</a></li>
         {% if user.is_superuser %}
             <li class="list-group-item"><a href="{% url 'product:add-product' %}">Add product</a></li>
+            <li class="list-group-item"><a href="{% url 'account:get_api_data' %}">Get API products</a></li>
         {% endif %}
     </ul>
 

@@ -278,7 +278,6 @@ def add_product_to_db(request):
         return HttpResponseRedirect(reverse('account:account'))
 
 
-
 def make_json_api(request):
     products = Product.objects.all()
     jsondata = serializers.serialize('json', products)
