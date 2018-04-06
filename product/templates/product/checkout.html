@@ -25,8 +25,6 @@
             <h4>Your cart is empty</h4>
         {% endif %}
 
-        <a href="{% url 'product:cart' %}"> Back to Cart</a>
-
 
         <form action="{% url 'product:complete-checkout' %}" method="POST">
             {% csrf_token %}
@@ -44,6 +42,8 @@
                 </div>
             </div>
         </form>
+    <br>
+    <a href="{% url 'product:cart' %}"> Back to Cart</a>
     </div>
 
 

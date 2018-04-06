@@ -1,6 +1,6 @@
 from product.models import Product, Order
 from account.models import Bookmark
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
 from base.settings import BASE_DIR
 import csv
@@ -12,6 +12,7 @@ from django.db import connection
 
 def get_user_account(request):
     return render(request, 'account/user_account.html')
+
 
 def get_user_bookmark(request):
     if request.method == 'GET':
@@ -27,6 +28,7 @@ def get_user_bookmark(request):
         }
         return render(request, 'account/wishlist.html', context)
 
+
 def add_bookmark(request):
     if request.method == 'POST':
         p_id = request.POST.get('product_id')
@@ -36,6 +38,7 @@ def add_bookmark(request):
         bookmark.save()
         messages.info(request, 'Product added to the wishlist')
         return HttpResponseRedirect(reverse('product:product-details', args=(p_id,)))
+
 
 def get_orders(request):
     if request.method == 'GET':
@@ -69,15 +72,16 @@ def upload_csv(request):
                 meta_keywords = row[4]
                 meta_description = row[5]
                 sku = row[6]
+                image = row[7]
                 on_the_main = False
 
                 cursor = connection.cursor()
 
-                cursor.execute(("INSERT INTO product_product (title,description,price,quantity,meta_keywords,meta_description,on_the_main,sku) "
-                                "VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (sku) DO UPDATE SET id=EXCLUDED.id,"
+                cursor.execute(("INSERT INTO product_product (title,description,price,quantity,meta_keywords,meta_description,on_the_main,sku,image) "
+                                "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (sku) DO UPDATE SET id=EXCLUDED.id,"
                                 "title=EXCLUDED.title,description=EXCLUDED.description,price=EXCLUDED.price,quantity=EXCLUDED.quantity,meta_keywords=EXCLUDED."
-                                "meta_keywords,meta_description=EXCLUDED.meta_description,on_the_main=EXCLUDED.on_the_main,sku=EXCLUDED.sku"),
-                                (title, description, price, quantity, meta_keywords, meta_description, on_the_main, sku))
+                                "meta_keywords,meta_description=EXCLUDED.meta_description,on_the_main=EXCLUDED.on_the_main,sku=EXCLUDED.sku, image=EXCLUDED.image"),
+                                (title, description, price, quantity, meta_keywords, meta_description, on_the_main, sku, image))
 
             messages.info(request, 'File uploaded successfully')
 

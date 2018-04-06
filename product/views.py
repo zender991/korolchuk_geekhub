@@ -160,13 +160,13 @@ def complete_order(request):
 
             currency = Currency.objects.get(title='hrn')
             currency_rate = currency.value
-            email_subtotal = subtotal * currency_rate
+            email_subtotal = round(subtotal * currency_rate, 2)
 
             for product in request.session['products']:
                 html_product_list += "<ul><li>" + product.get('title') + "</li><li>Price - " + str((product.get('price'))* currency_rate) \
                                      + "</li><li>Quantity - " + str(product.get('quantity')) + "</li></ul><hr>"
 
-            #send_email(name, email_subtotal, html_product_list)
+            send_email(name, email_subtotal, html_product_list)
 
             del request.session['products']
             del request.session['subtotal']
@@ -230,30 +230,6 @@ def save_edited_subcategory(request):
         edited_subcategory.save()
 
         return HttpResponseRedirect(reverse('product:subcategory-product', args=subcategory_id))
-
-
-def order_products(request):
-    if request.method == 'POST':
-        if request.POST.get('order_by') == 'asc':
-            products = Product.objects.all().order_by('price')
-
-            context = {
-                'subcategory': products
-            }
-
-            print(context)
-
-            return redirect('/')
-        elif request.POST.get('order_by') == 'desc':
-            products = Product.objects.all().order_by('-price')
-
-            context = {
-                'subcategory': products
-            }
-
-            print(context)
-
-            return HttpResponseRedirect(reverse('product:index'))
 
 
 def add_product(request):

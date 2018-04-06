@@ -81,12 +81,6 @@ WSGI_APPLICATION = 'base.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 #
 # DATABASES = {
 #     'default': {
@@ -178,6 +172,10 @@ STATICFILES_DIRS = ()
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CRONJOBS = [
+    ('*/15 * * * *', 'product.cron.get_api_data')
+]
 
 
 
